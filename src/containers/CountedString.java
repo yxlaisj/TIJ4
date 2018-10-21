@@ -6,9 +6,11 @@ import static net.mindview.util.Print.*;
 public class CountedString {
 	private static List<String> created = new ArrayList<>();
 	private String s;
+	private char c;
 	private int id = 0;
-	public CountedString(String str) {
+	public CountedString(String str, char ch) {
 		s = str;
+		c = ch;
 		created.add(s);
 		//id is hte totla number of instances of this string in use by CountedString
 		for (String s2 : created) {
@@ -26,6 +28,7 @@ public class CountedString {
 		//The very simple approach, return s.hashCode() * id; Using Joshua Bloch's recipe
 		int result = 17;
 		result = 37 * result + s.hashCode();
+		result = 37 * result + c;
 		result = 37 * result + id;
 		return result;
 	}
@@ -38,24 +41,12 @@ public class CountedString {
 			return false;
 		}else {
 			if(o.getClass() == CountedString.class) {
-				CountedString c = (CountedString)o;
-				return s.equals(c.s) && id == c.id;
+				CountedString cs = (CountedString)o;
+				return s.equals(cs.s) && id == cs.id && c == cs.c;
 			}else {
+			
 				return false;
 			}
-		}
-	}
-
-	public static void main(String[] args) {
-		Map<CountedString, Integer> map = new HashMap<>();
-		CountedString[] cs = new CountedString[5];
-		for(int i = 0; i < cs.length; i++) {
-			cs[i] = new CountedString("hi");
-			map.put(cs[i], i);
-		}
-		print(map);
-		for(CountedString csString : cs) {
-			print(map.get(csString));
 		}
 	}
 }
