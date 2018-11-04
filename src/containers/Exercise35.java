@@ -1,5 +1,55 @@
 package containers;
 
+import java.util.*;
+
 public class Exercise35 {
-	
+	static List<Test<Map<Integer, Integer>>> tests = new ArrayList<>();
+	static {
+		tests.add(new Test<Map<Integer, Integer>>("put") {
+			int test(Map<Integer, Integer> map, TestParam tp) {
+				int loops = tp.loops;
+				int size = tp.size;
+				for(int i = 0; i < loops; i++){
+					map.clear();
+					for(int j = 0; j < size; j++){
+						map.put(i, j);
+					}
+				}
+				return loops * size;
+			}
+		});
+
+		tests.add(new Test<Map<Integer, Integer>>("get") {
+			int test(Map<Integer, Integer> map, TestParam tp) {
+				int loops = tp.loops;
+				int span = tp.size * 2;
+				for(int i = 0; i < loops; i++){
+					for(int j = 0; j < span; j++){
+						map.get(j);
+					}
+				}
+				return loops * span;
+			}
+		});
+
+		tests.add(new Test<Map<Integer, Integer>>("ite") {
+			int test(Map<Integer, Integer> map, TestParam tp) {
+				int loops = tp.loops * 10;
+				for(int i = 0; i < loops; i++){
+					Iterator it = map.entrySet().iterator();
+					while(it.hasNext()){
+						it.next();
+					}
+				}
+				return loops * map.size();
+			}
+		});
+	}
+	public static void main(String[] args) {
+		Tester.run(new TreeMap<Integer, Integer>(), tests);
+		Tester.run(new HashMap<Integer, Integer>(), tests);
+		Tester.run(new LinkedHashMap<Integer, Integer>(), tests);
+		Tester.run(new SlowMap<Integer, Integer>(), tests);
+		Tester.run(new SlowMap2<Integer, Integer>(), tests);
+	}
 }
