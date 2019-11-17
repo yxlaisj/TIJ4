@@ -21,7 +21,7 @@ public class UsingBuffers {
 
     public static void main(String[] args) {
         char[] data = "UsingBuffers".toCharArray();
-        ByteBuffer bb = ByteBuffer.allocate(data.length * 2);
+        ByteBuffer bb = ByteBuffer.allocate(data.length * 2);   // 一个字符两个byte
         CharBuffer cb = bb.asCharBuffer();
         cb.put(data);
         System.out.println(cb.rewind());
