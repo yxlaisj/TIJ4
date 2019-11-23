@@ -7,4 +7,7 @@ import java.io.Serializable;
  * @date 2019/11/23 2:55 下午
  */
 public class Alien implements Serializable {
+    public Alien() {
+        System.out.println("Construct Alien");
+    }
 }
