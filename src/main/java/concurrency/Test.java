@@ -6,8 +6,7 @@ package concurrency;
  */
 public class Test {
     public static void main(String[] args) {
-        int r = -1 << 29;
-        System.out.println(r);
-        System.out.println(Integer.toBinaryString(r));
+        int a  =0x61c88647;
+        System.out.println(a*2);
     }
 }
