@@ -39,9 +39,7 @@ class Toast {
     }
 }
 
-class ToastQueue extends LinkedBlockingQueue<Toast> {
-}
-
+class ToastQueue extends LinkedBlockingQueue<Toast> { }
 
 class Toaster implements Runnable {
     private ToastQueue toastQueue;
@@ -56,7 +54,7 @@ class Toaster implements Runnable {
     public void run() {
         try {
             while (!Thread.interrupted()) {
-                TimeUnit.MILLISECONDS.sleep(100 + rand.nextInt());
+                TimeUnit.MILLISECONDS.sleep(100 + rand.nextInt(1000));
                 Toast t = new Toast(count++);
                 System.out.println(t);
                 toastQueue.put(t);
